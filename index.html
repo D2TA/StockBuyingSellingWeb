@@ -22,5 +22,40 @@
     <script src="./script.js"></script>
   </head>
   <body>
+    <h1>Stocks</h1>
+    This is a simulation stock buying/selling application. Every 5 minutes will be a full day. 
+    <div class = "content">
+      <div id = "HyperParameters">
+        <div>
+          <p><label for="commission">Commission (between $0 and $10) per trade:</label></p>
+          <input type="number" id="commission" name="commission" min="1" max="5">
+        </div>
+        <div>
+          <p><label for="inflation">The market inflation rate (between 0% to 100%):</label></p>
+          <input type="number" id="inflation" name="inflation" min="0" max="1">
+        </div>
+        <div>
+          <p><label for="startingBalance">The starting balance (between $1 to $1000):</label></p>
+          <input type="number" id="initial_Balance" name="initial_Balance" min="1" max="1000">
+        </div>
+      </div>
+      <div class = "MarketTicker">
+        <div>
+          MarketIndex (10)
+        </div>
+        <div>
+          TechIndex (5)
+        </div>
+        <div>
+          FinIndex (3)
+        </div>                
+        <div>
+          FoodIndex (2)
+        </div>                
+      </div>
+      <div class = "StockTicker">
+      </div>
+
+    </div>
   </body>
 </html>

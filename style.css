@@ -1,0 +1,24 @@
+body {
+  color: white;
+  background-color: #121212;
+  font-family: 'Space Mono', monospace;
+  margin: 0px 0px;
+  padding: 0px 0px;  
+}
+
+h1 {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.MarketTicker, #HyperParameters {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  background-color: grey;
+  margin-bottom: 1%;
+}
+
+#HyperParameters > div, .MarketTicker > div {
+  flex: 50%;
+}
+
