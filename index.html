@@ -35,14 +35,14 @@
           secs = checkTime(s);
           document.getElementById('txt').innerHTML =  h + ":" + m + ":" + secs;
           if (s%5 == 0) {
-            priceUpdate('Market',getRandomChange());
+            UpdateIndicator('marketIndicator', priceUpdate('Market',getRandomChange()) );
             document.getElementById('marketPrice').innerHTML = marketObj['Market'][marketObj['Market'].length - 1].toFixed(2);
-            priceUpdate('Tech',getRandomChange());
+            UpdateIndicator('techIndicator', priceUpdate('Tech',getRandomChange()) );
             document.getElementById('techPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1].toFixed(2);
-            priceUpdate('Fin',getRandomChange());
-            document.getElementById('finPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1].toFixed(2);
-            priceUpdate('Food',getRandomChange());
-            document.getElementById('foodPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1].toFixed(2);            
+            UpdateIndicator('finIndicator', priceUpdate('Fin',getRandomChange()) );
+            document.getElementById('finPrice').innerHTML = marketObj['Fin'][marketObj['Fin'].length - 1].toFixed(2);
+            UpdateIndicator('foodIndicator', priceUpdate('Food',getRandomChange()) );
+            document.getElementById('foodPrice').innerHTML = marketObj['Food'][marketObj['Food'].length - 1].toFixed(2);            
 //
             priceUpdate('TSLA',getRandomChange());
             priceUpdate('NVDA',getRandomChange());
@@ -70,7 +70,7 @@
     <div class = 'timeTicker'>
       <span style="display: inline;"> This is a simulation | Time: <span id="txt"></span> | Number of Price Updates: <span id="count"></span> | Next Update in: <span id="seconds-remain"></span></span>
     </div>
-    <div class = "content">
+    <div class = "parameters">
       <div id = "HyperParameters">
         <div>
           <p><label for="commission">Commission (between $0 and $10) per trade:</label></p>
@@ -85,62 +85,63 @@
           <input type="number" id="initial_Balance" name="initial_Balance" min="1" max="1000">
         </div>
       </div>
-      <div class = "balanceTicker">
-        <div>          
-          <h1> Balance </h1>
-          <div id = "balance"></div>
-        </div>
-        <div>
-          <h1>Transactions</h1>
-          <div id = "numTransaction"></div>
-        </div>
-      </div>            
-      <div class = "MarketTicker">
-        <div onclick="draftTable('Market')">
-          <div class = "IndexText">Market </div>
-          <span id ="marketPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="marketIndicator">trending_up</span>
-        </div>
-        <div onclick="draftTable('Tech')">
-          <div class = "IndexText">Tech. </div>
-          <span id ="techPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="techIndicator">trending_up</span>
-        </div>
-        <div onclick="draftTable('Fin')">
-          <div class = "IndexText">Fin. </div>
-          <span id ="finPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="finIndicator">trending_up</span>
-        </div>                
-        <div onclick="draftTable('Food')">
-          <div class = "IndexText">Food </div>
-          <span id ="foodPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="foodIndicator">trending_up</span>
-        </div>                
+    </div>
+    <div class = "balanceTicker">
+      <div>          
+        <h1> Balance </h1>
+        <div id = "balance"></div>
       </div>
-      <div class = "StockTicker">
-        <table id="StockSpreadsheet">
-          <colgroup>
-            <col span="1" style="width: 100px; text-align: center;">
-            <col span="1" style="width: 75px;">
-            <col span="1" style="">
-            <col span="1" style="width: 100px; text-align: center; ">
-            <col span="1" style="width: 100px; text-align: center; ">
-          </colgroup>
-          <tr>
-            <td>Industry</td>
-            <td>Symbol</td>
-            <td>Name</td>
-            <td>Price</td>
-            <td>Shares Owned</td>
-            <td><td>
-          </tr>
-        </table>
+      <div>
+        <h1>Transactions</h1>
+        <div id = "numTransaction"></div>
       </div>
-      <div class = "chartTicker">
-        <div id="trend">
-          put chart here
-        </div>
+    </div>            
+    <div class = "MarketTicker">
+      <div onclick="draftTable('Market')">
+        <div class = "IndexText">Market </div>
+        <span id ="marketPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="marketIndicatorUp">trending_up</span><span class="material-icons-outlined" id="marketIndicatorDown">trending_down</span><span class="material-icons-outlined" id = "marketIndicatorFlat">trending_flat</span>
       </div>
-      <div class="HistoryTicker">
-        <h1>Portfolio history <button id="expandhistory" onclick="expandhistory()">+</button></h1> 
-        <div id="history">
-        </div>
+      <div onclick="draftTable('Tech')">
+        <div class = "IndexText">Tech. </div>
+        <span id ="techPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="techIndicatorUp">trending_up</span><span class="material-icons-outlined" id="techIndicatorDown">trending_down</span><span class="material-icons-outlined" id = "techIndicatorFlat">trending_flat</span>
+      </div>
+      <div onclick="draftTable('Fin')">
+        <div class = "IndexText">Fin. </div>
+        <span id ="finPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="finIndicatorUp">trending_up</span><span class="material-icons-outlined" id="finIndicatorDown">trending_down</span><span class="material-icons-outlined" id = "finIndicatorFlat">trending_flat</span>
+      </div>                
+      <div onclick="draftTable('Food')">
+        <div class = "IndexText">Food </div>
+        <span id ="foodPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="foodIndicatorUp">trending_up</span><span class="material-icons-outlined" id="foodIndicatorDown">trending_down</span><span class="material-icons-outlined" id = "foodIndicatorFlat">trending_flat</span>
+      </div>                
+    </div>
+    <div class = "StockTicker">
+      <table id="StockSpreadsheet">
+        <colgroup>
+          <col span="1" style="width: 100px; text-align: center;">
+          <col span="1" style="width: 75px;">
+          <col span="1" style="">
+          <col span="1" style="width: 100px; text-align: center; ">
+          <col span="1" style="width: 100px; text-align: center; ">
+        </colgroup>
+        <tr>
+          <td>Industry</td>
+          <td>Symbol</td>
+          <td>Name</td>
+          <td>Price</td>
+          <td>Shares Owned</td>
+          <td><td>
+        </tr>
+      </table>
+    </div>
+    <div class = "chartTicker">
+      <div id="trend">
+        <h1> Display Trend </h1>
+        put chart here
+      </div>
+    </div>
+    <div class="HistoryTicker">
+      <h1>Last four transactions <button id="expandhistory" onclick="expandhistory()">+</button></h1> 
+      <div id="history">
       </div>
     </div>
   </body>

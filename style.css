@@ -15,7 +15,6 @@ h1 {
   text-align: center;
   display: flex;
   flex-direction: row;
-  background-color: grey;
 }
 
 #HyperParameters > div, .MarketTicker > div {
@@ -28,7 +27,6 @@ h1 {
 
 table {
   width: 100%;
-  background-color: orange;
 }
 
 .balanceTicker {
@@ -53,9 +51,6 @@ button {
   font-size: medium;
 }
 
-.HistoryTicker {
-  border-bottom: 1px solid white;
-}
 
 #history {
   visibility: hidden;
@@ -76,6 +71,27 @@ button {
 .IndexText {
   font-size: 30px;
   font-family: 'Press Start 2P', cursive;
+}
+
+#marketIndicatorUp, #techIndicatorUp, #finIndicatorUp, #foodIndicatorUp {
+  color: green;
+  margin-left: 10px;
+  visibility: hidden;
+  display: none;
+}
+
+#marketIndicatorDown, #techIndicatorDown, #finIndicatorDown, #foodIndicatorDown {
+  color: red;
+  margin-left: 10px;
+  visibility: hidden;
+  display: none;
+}
+
+#marketIndicatorFlat, #techIndicatorFlat, #finIndicatorFlat, #foodIndicatorFlat {
+  color: grey;
+  margin-left: 10px;
+  visibility: hidden;
+  display: none;
 }
 
 #HyperParameters {
