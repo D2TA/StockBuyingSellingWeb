@@ -23,9 +23,7 @@
     <script src="./script-chartjs.js"></script>
     <script src="./script-html.js"></script>
     <script>
-        var count = 0; // Number of Updates/Price Changes
-
-        function startTime(count) {
+        function startTime() {
           const today = new Date();
           const max = 1;
           const min = -1;
@@ -35,7 +33,7 @@
           m = checkTime(m);
           secs = checkTime(s);
           document.getElementById('txt').innerHTML =  h + ":" + m + ":" + secs;
-          if (s%3 == 0) {
+          if (s%5 == 0) {
             priceUpdate('Market',getRandomChange());
             document.getElementById('marketPrice').innerHTML = marketObj['Market'][marketObj['Market'].length - 1];
             priceUpdate('Tech',getRandomChange());
@@ -44,12 +42,12 @@
             document.getElementById('finPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1];
             priceUpdate('Food',getRandomChange());
             document.getElementById('foodPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1];            
-            document.getElementById('count').innerHTML = 'update!';
-          } else if (s%4 == 0 || s%5 == 0) {
-            document.getElementById('count').innerHTML = 'updated!';
-          } else {
-            document.getElementById('count').innerHTML = 'no change!';
+//
+            priceUpdate('TSLA',getRandomChange());
+            draftTable('Market'); 
+            document.getElementById('count').innerHTML =  marketObj['Market'].length - 1;
           };
+          document.getElementById('seconds-remain').innerHTML = 5 - s%5;
           setTimeout(startTime, 1000);          
         };
 
@@ -61,16 +59,13 @@
   </head>
   <body onload="ScriptOnload()">
     <h1>Stocks 
-      <div id = "VisualButton">
-        <span class="material-icons-outlined" id="dark_mode">dark_mode</span>
-        <span class="material-icons-outlined" id="light_mode">light_mode</span>
-      </div>
     </h1>
-    <span style="display: inline;"> This is a simulation | Time: <span id="txt"></span> | Number of Price Updates: <span id="count"></span></span>
-    <br>
-    This is a simulation stock buying/selling application. Every 5 minutes will be a full day. 
-    <div class = "timeContent">
-      Simulation Day: 1   | Simulation Time: HH:MM:SS
+    <div id = "VisualButton">
+      <span class="material-icons-outlined" id="dark_mode">dark_mode</span>
+      <span class="material-icons-outlined" id="light_mode">light_mode</span>
+    </div>
+    <div class = 'timeTicker'>
+      <span style="display: inline;"> This is a simulation | Time: <span id="txt"></span> | Number of Price Updates: <span id="count"></span> | Next Update in: <span id="seconds-remain"></span></span>
     </div>
     <div class = "content">
       <div id = "HyperParameters">

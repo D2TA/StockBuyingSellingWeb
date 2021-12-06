@@ -56,11 +56,11 @@ function priceUpdate(symbol,changeValue) {
   if (Object.keys(marketObj).includes(symbol)) {
     marketArray = marketObj[symbol];
     marketArray.push(marketArray[marketArray.length - 1]*(1 + changeValue));
-    console.log(marketArray);
+    // console.log(marketArray);
   } else {
     priceArray = priceObj[symbol];
     priceArray.push(priceArray[priceArray.length - 1]*(1 + changeValue));
-    console.log(priceArray);
+    // console.log(priceArray);
   };
 }
 
