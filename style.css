@@ -32,11 +32,17 @@ table {
 }
 
 .balanceTicker {
-  padding-left: 20px;
-  padding-top: 1px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
 }
 
-#balance {
+.balanceTicker > div {
+  flex: 50%;
+}
+
+#balance, #numTransaction {
   font-size: xx-large;
 }
 
@@ -70,4 +76,9 @@ button {
 .IndexText {
   font-size: 30px;
   font-family: 'Press Start 2P', cursive;
+}
+
+#HyperParameters {
+  display: none; 
+  visibility: hidden;
 }

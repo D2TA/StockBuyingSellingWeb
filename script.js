@@ -17,7 +17,9 @@ const  marketObj = JSON.parse(marketMatrix);
 // Purchase History Array | DATETIME | SYMBOL | TRANSACTION_TYPE | TRANSACTION_VALUE (-1,1) | QUANTITY | PRICE
 // related function TransactionEvent()
 // Sample Price History
-const history = new Array([new Date(2021,12,04,20,44,00), "TSLA","BUY",1,10,10.20],[new Date(2021,12,04,20,47,00), "NVDA","BUY",1,2,80]);
+// Reminder; dates in JavaScript start at 0: Jan to 11: Dec
+// const history = new Array([new Date(2021,11,04,20,44,00), "TSLA","BUY",1,10,10.20],[new Date(2021,11,04,20,47,00), "NVDA","BUY",1,2,80]);
+const history = new Array();
 
 // Hyperparameters Array
 const Hyperparameters = new Array([])
@@ -33,6 +35,7 @@ function ScriptOnload() {
   draftTable('Market'); 
   updateHistory();
   updateBalance();
+  updateCount();
 }
 
 // Transaction Function
@@ -46,6 +49,7 @@ function TransactionEvent (TRANSACTION_TYPE, symbol, quantity, price, DATETIME) 
   history.push(inputs);
   updateHistory();
   updateBalance();  
+  updateCount();
   console.log(TRANSACTION_TYPE + ' ' + symbol);
 }
 
@@ -108,11 +112,15 @@ function draftTable(Selectindustry) {
 };
 
 function updateHistory() {
-  document.getElementById('history').innerHTML = history.join('<br>');  
+  document.getElementById('history').innerHTML = history.sort().slice(-4).join('<br>');  
 }
 
 function updateBalance() {
   document.getElementById('balance').innerHTML = currentBalance().toFixed(2);  
+}
+
+function updateCount() {
+  document.getElementById('numTransaction').innerHTML = history.length;  
 }
 
 // Completed Function 
