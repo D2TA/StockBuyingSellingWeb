@@ -36,6 +36,8 @@ function ScriptOnload() {
   updateHistory();
   updateBalance();
   updateCount();
+  darkmode();
+  LoadChart();
 }
 
 // Transaction Function
