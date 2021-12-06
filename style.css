@@ -22,3 +22,47 @@ h1 {
   flex: 50%;
 }
 
+table {
+  width: 100%;
+  background-color: orange;
+}
+
+.balanceTicker {
+  padding-left: 20px;
+  padding-top: 1px;
+}
+
+#balance {
+  font-size: xx-large;
+}
+
+.timeContent {
+  background-color: orange;
+}
+
+button {
+  margin-right: 10px;
+  border: 0px solid black;
+  border-radius: 5px; 
+  font-size: medium;
+}
+
+.HistoryTicker {
+  border-bottom: 1px solid white;
+}
+
+#history {
+  visibility: hidden;
+  display: none;
+}
+
+#expandhistory{
+  font-size: xx-large;
+  width: 50px;
+}
+
+#VisualButton {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}

@@ -20,10 +20,58 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">    
 <!-- Script -->
     <script src="./script.js"></script>
+    <script src="./script-chartjs.js"></script>
+    <script src="./script-html.js"></script>
+    <script>
+        var count = 0; // Number of Updates/Price Changes
+
+        function startTime(count) {
+          const today = new Date();
+          const max = 1;
+          const min = -1;
+          let h = today.getHours();
+          let m = today.getMinutes();
+          let s = today.getSeconds();
+          m = checkTime(m);
+          secs = checkTime(s);
+          document.getElementById('txt').innerHTML =  h + ":" + m + ":" + secs;
+          if (s%3 == 0) {
+            priceUpdate('Market',getRandomChange());
+            document.getElementById('marketPrice').innerHTML = marketObj['Market'][marketObj['Market'].length - 1];
+            priceUpdate('Tech',getRandomChange());
+            document.getElementById('techPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1];
+            priceUpdate('Fin',getRandomChange());
+            document.getElementById('finPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1];
+            priceUpdate('Food',getRandomChange());
+            document.getElementById('foodPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1];            
+            document.getElementById('count').innerHTML = 'update!';
+          } else if (s%4 == 0 || s%5 == 0) {
+            document.getElementById('count').innerHTML = 'updated!';
+          } else {
+            document.getElementById('count').innerHTML = 'no change!';
+          };
+          setTimeout(startTime, 1000);          
+        };
+
+        function checkTime(i) {
+          if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+          return i;
+        };
+    </script>
   </head>
-  <body>
-    <h1>Stocks</h1>
+  <body onload="ScriptOnload()">
+    <h1>Stocks 
+      <div id = "VisualButton">
+        <span class="material-icons-outlined" id="dark_mode">dark_mode</span>
+        <span class="material-icons-outlined" id="light_mode">light_mode</span>
+      </div>
+    </h1>
+    <span style="display: inline;"> This is a simulation | Time: <span id="txt"></span> | Number of Price Updates: <span id="count"></span></span>
+    <br>
     This is a simulation stock buying/selling application. Every 5 minutes will be a full day. 
+    <div class = "timeContent">
+      Simulation Day: 1   | Simulation Time: HH:MM:SS
+    </div>
     <div class = "content">
       <div id = "HyperParameters">
         <div>
@@ -39,23 +87,61 @@
           <input type="number" id="initial_Balance" name="initial_Balance" min="1" max="1000">
         </div>
       </div>
+      <div class = "balanceTicker">
+        <h1> Current Balance </h1>
+        <div id = "balance">
+        </div>
+      </div>            
       <div class = "MarketTicker">
-        <div>
+        <div onclick="draftTable('Market')">
           MarketIndex (10)
+          <br>
+          <span id ="marketPrice"></span>
         </div>
-        <div>
+        <div onclick="draftTable('Tech')">
           TechIndex (5)
+          <br>
+          <span id ="techPrice"></span>
         </div>
-        <div>
+        <div onclick="draftTable('Fin')">
           FinIndex (3)
+          <br>
+          <span id ="finPrice"></span>
         </div>                
-        <div>
+        <div onclick="draftTable('Food')">
           FoodIndex (2)
+          <br>
+          <span id ="foodPrice"></span>
         </div>                
       </div>
       <div class = "StockTicker">
+        <table id="StockSpreadsheet">
+          <colgroup>
+            <col span="1" style="width: 100px; text-align: center;">
+            <col span="1" style="width: 75px;">
+            <col span="1" style="">
+            <col span="1" style="width: 100px; text-align: center; ">
+            <col span="1" style="width: 100px; text-align: center; ">
+          </colgroup>
+          <tr>
+            <td>Industry</td>
+            <td>Symbol</td>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Shares Owned</td>
+            <td><td>
+          </tr>
+        </table>
       </div>
-
+      <div class = "chartTicker">
+        <div id="trend">
+        </div>
+      </div>
+      <div class="HistoryTicker">
+        <h1>Portfolio history <button id="expandhistory" onclick="expandhistory()">+</button></h1> 
+        <div id="history">
+        </div>
+      </div>
     </div>
   </body>
 </html>
