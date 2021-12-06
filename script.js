@@ -31,8 +31,8 @@ function getRandomChange() {
 function ScriptOnload() {
   startTime(0);
   draftTable('Market'); 
-  document.getElementById('balance').innerHTML = currentBalance(portfolioObj);
   updateHistory();
+  updateBalance();
 }
 
 // Transaction Function
@@ -45,6 +45,7 @@ function TransactionEvent (TRANSACTION_TYPE, symbol, quantity, price, DATETIME) 
   inputs = [new Date(DATETIME.getFullYear(), DATETIME.getMonth(), DATETIME.getDate(), DATETIME.getHours(),DATETIME.getMinutes(), DATETIME.getSeconds()), symbol, TRANSACTION_TYPE, TRANSACTION_VALUE, quantity, price];
   history.push(inputs);
   updateHistory();
+  updateBalance();  
   console.log(TRANSACTION_TYPE + ' ' + symbol);
 }
 
@@ -110,6 +111,10 @@ function updateHistory() {
   document.getElementById('history').innerHTML = history.join('<br>');  
 }
 
+function updateBalance() {
+  document.getElementById('balance').innerHTML = currentBalance().toFixed(2);  
+}
+
 // Completed Function 
 function currentBalance () {
   return history.reduce(getSum, 0);
@@ -118,13 +123,3 @@ function currentBalance () {
     return total + (num[3]*num[4]*num[5]);
   };
 }
-
-// function currentBalance (portfolio) {
-//   TotalBalance = 0
-//   for (const info_row in portfolioObj) {
-//     var quant = portfolioObj[info_row][0];
-//     var price = portfolioObj[info_row][1];
-//     TotalBalance  = TotalBalance + quant*price;
-//   };
-//   return TotalBalance;
-// };
