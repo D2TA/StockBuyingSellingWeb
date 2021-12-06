@@ -22,6 +22,7 @@
     <script src="./script.js"></script>
     <script src="./script-chartjs.js"></script>
     <script src="./script-html.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>    
     <script>
         function startTime() {
           const today = new Date();
@@ -35,15 +36,17 @@
           document.getElementById('txt').innerHTML =  h + ":" + m + ":" + secs;
           if (s%5 == 0) {
             priceUpdate('Market',getRandomChange());
-            document.getElementById('marketPrice').innerHTML = marketObj['Market'][marketObj['Market'].length - 1];
+            document.getElementById('marketPrice').innerHTML = marketObj['Market'][marketObj['Market'].length - 1].toFixed(2);
             priceUpdate('Tech',getRandomChange());
-            document.getElementById('techPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1];
+            document.getElementById('techPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1].toFixed(2);
             priceUpdate('Fin',getRandomChange());
-            document.getElementById('finPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1];
+            document.getElementById('finPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1].toFixed(2);
             priceUpdate('Food',getRandomChange());
-            document.getElementById('foodPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1];            
+            document.getElementById('foodPrice').innerHTML = marketObj['Tech'][marketObj['Tech'].length - 1].toFixed(2);            
 //
             priceUpdate('TSLA',getRandomChange());
+            priceUpdate('NVDA',getRandomChange());
+            priceUpdate('BAC',getRandomChange());            
             draftTable('Market'); 
             document.getElementById('count').innerHTML =  marketObj['Market'].length - 1;
           };
@@ -61,8 +64,8 @@
     <h1>Stocks 
     </h1>
     <div id = "VisualButton">
-      <span class="material-icons-outlined" id="dark_mode">dark_mode</span>
-      <span class="material-icons-outlined" id="light_mode">light_mode</span>
+      <span class="material-icons-outlined" id="dark_mode" onclick="darkmode();">dark_mode</span>
+      <span class="material-icons-outlined" id="light_mode" onclick="lightmode();">light_mode</span>
     </div>
     <div class = 'timeTicker'>
       <span style="display: inline;"> This is a simulation | Time: <span id="txt"></span> | Number of Price Updates: <span id="count"></span> | Next Update in: <span id="seconds-remain"></span></span>
@@ -89,24 +92,20 @@
       </div>            
       <div class = "MarketTicker">
         <div onclick="draftTable('Market')">
-          MarketIndex (10)
-          <br>
-          <span id ="marketPrice"></span>
+          <div class = "IndexText">Market </div>
+          <span id ="marketPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="marketIndicator">trending_up</span>
         </div>
         <div onclick="draftTable('Tech')">
-          TechIndex (5)
-          <br>
-          <span id ="techPrice"></span>
+          <div class = "IndexText">Tech. </div>
+          <span id ="techPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="techIndicator">trending_up</span>
         </div>
         <div onclick="draftTable('Fin')">
-          FinIndex (3)
-          <br>
-          <span id ="finPrice"></span>
+          <div class = "IndexText">Fin. </div>
+          <span id ="finPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="finIndicator">trending_up</span>
         </div>                
         <div onclick="draftTable('Food')">
-          FoodIndex (2)
-          <br>
-          <span id ="foodPrice"></span>
+          <div class = "IndexText">Food </div>
+          <span id ="foodPrice" style="font-size: 20px;"></span><span class="material-icons-outlined" id="foodIndicator">trending_up</span>
         </div>                
       </div>
       <div class = "StockTicker">
@@ -130,6 +129,7 @@
       </div>
       <div class = "chartTicker">
         <div id="trend">
+          put chart here
         </div>
       </div>
       <div class="HistoryTicker">

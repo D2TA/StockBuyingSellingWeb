@@ -11,15 +11,19 @@ h1 {
 }
 
 .MarketTicker, #HyperParameters {
+  align-items: center;
   text-align: center;
   display: flex;
   flex-direction: row;
   background-color: grey;
-  margin-bottom: 1%;
 }
 
 #HyperParameters > div, .MarketTicker > div {
   flex: 50%;
+}
+
+.MarketTicker {
+  height: 75px;
 }
 
 table {
@@ -61,4 +65,9 @@ button {
   position: absolute;
   top: 8px;
   right: 16px;
+}
+
+.IndexText {
+  font-size: 30px;
+  font-family: 'Press Start 2P', cursive;
 }

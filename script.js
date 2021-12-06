@@ -62,6 +62,13 @@ function priceUpdate(symbol,changeValue) {
     priceArray.push(priceArray[priceArray.length - 1]*(1 + changeValue));
     // console.log(priceArray);
   };
+    if (changeValue > 0) {
+      return 1
+    } else if (changeValue < 0) {
+      return -1
+    } else {
+      return 0
+    }; 
 }
 
 // priceUpdate('TSLA',getRandomChange())
@@ -89,7 +96,7 @@ function draftTable(Selectindustry) {
       Col2.innerHTML = obj[info_row].symbol;
       Col3.innerHTML = obj[info_row].name;
       // Col3.innerHTML = obj[info_row].description;
-      Col4.innerHTML = priceObj[ obj[info_row].symbol ][ priceObj[obj[info_row].symbol].length - 1 ];     // Pulls latest price from price matrix
+      Col4.innerHTML = priceObj[ obj[info_row].symbol ][ priceObj[obj[info_row].symbol].length - 1 ].toFixed(2);     // Pulls latest price from price matrix
       Col5.innerHTML = 0;
       Col6.innerHTML = '<button onclick="' 
         + "TransactionEvent('BUY','" + obj[info_row].symbol + "',10,priceObj." + obj[info_row].symbol + '[priceObj.' + obj[info_row].symbol + '.length - 1],new Date());">Buy</button>'
@@ -103,13 +110,21 @@ function updateHistory() {
   document.getElementById('history').innerHTML = history.join('<br>');  
 }
 
-// Completed Function
-function currentBalance (portfolio) {
-  TotalBalance = 0
-  for (const info_row in portfolioObj) {
-    var quant = portfolioObj[info_row][0];
-    var price = portfolioObj[info_row][1];
-    TotalBalance  = TotalBalance + quant*price;
+// Completed Function 
+function currentBalance () {
+  return history.reduce(getSum, 0);
+
+  function getSum(total, num) {
+    return total + (num[3]*num[4]*num[5]);
   };
-  return TotalBalance;
-};
+}
+
+// function currentBalance (portfolio) {
+//   TotalBalance = 0
+//   for (const info_row in portfolioObj) {
+//     var quant = portfolioObj[info_row][0];
+//     var price = portfolioObj[info_row][1];
+//     TotalBalance  = TotalBalance + quant*price;
+//   };
+//   return TotalBalance;
+// };
