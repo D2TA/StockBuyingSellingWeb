@@ -18,14 +18,14 @@
 <!-- Google Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">    
-<!-- Script -->
-    <script src="./script.js"></script>
-    <script src="./script-chartjs.js"></script>
-    <script src="./script-html.js"></script>
 <!-- Script ChartJS https://www.chartjs.org/docs/latest/    -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>    
+<!-- Script -->
+    <script src="./script.js"></script>
+    <script src="./script-html.js"></script>
     <script>
         function startTime() {
+          var latency = 2;
           const today = new Date();
           const max = 1;
           const min = -1;
@@ -35,7 +35,7 @@
           m = checkTime(m);
           secs = checkTime(s);
           document.getElementById('txt').innerHTML =  h + ":" + m + ":" + secs;
-          if (s%5 == 0) {
+          if (s%latency == 0) {
             UpdateIndicator('marketIndicator', priceUpdate('Market',getRandomChange()) );
             document.getElementById('marketPrice').innerHTML = marketObj['Market'][marketObj['Market'].length - 1].toFixed(2);
             UpdateIndicator('techIndicator', priceUpdate('Tech',getRandomChange()) );
@@ -50,8 +50,9 @@
             priceUpdate('BAC',getRandomChange());            
             draftTable('Market'); 
             document.getElementById('count').innerHTML =  marketObj['Market'].length - 1;
+            UpdateChartData();
           };
-          document.getElementById('seconds-remain').innerHTML = 5 - s%5;
+          document.getElementById('seconds-remain').innerHTML = latency - s%latency;
           setTimeout(startTime, 1000);          
         };
 
@@ -135,10 +136,11 @@
       </table>
     </div>
     <div class = "chartTicker">
-      <h1>Display Trend <button id="expandTrend" onclick="expandTrend()">+</button></h1> 
+      <h1>Display Trend</h1> 
       <div id="trend">
          <canvas id="myChart" width="400" height="100"></canvas>
       </div>
+      <script src="./script-chartjs.js"></script>      
     </div>
     <div class="HistoryTicker">
       <h1>Last four transactions <button id="expandhistory" onclick="expandhistory()">+</button></h1> 

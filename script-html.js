@@ -1,16 +1,3 @@
-function expandTrend() {
-  var propert = document.getElementById("trend").style.visibility;
-  if (propert == "hidden") {
-    document.getElementById('expandTrend').innerHTML = '-';
-    document.getElementById("trend").style.display = 'flex';
-    return document.getElementById("trend").style.visibility = 'visible';
-  } else {
-    document.getElementById('expandTrend').innerHTML = '+';    
-    document.getElementById("trend").style.display = 'none';
-    return document.getElementById("trend").style.visibility = 'hidden';
-  };
-}
-
 function expandhistory() {
   var propert = document.getElementById("history").style.visibility;
   if (propert == "hidden") {

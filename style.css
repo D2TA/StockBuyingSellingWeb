@@ -55,12 +55,12 @@ button:hover {
   background-color: grey;
 }
 
-#trend, #history {
+#history {
   visibility: hidden;
   display: none;
 }
 
-#expandhistory, #expandTrend {
+#expandhistory {
   font-size: xx-large;
   width: 50px;
 }
@@ -75,6 +75,7 @@ button:hover {
   font-size: 30px;
   font-family: 'Press Start 2P', cursive;
 }
+
 
 #marketIndicatorUp, #techIndicatorUp, #finIndicatorUp, #foodIndicatorUp {
   color: green;
