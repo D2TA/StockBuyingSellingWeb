@@ -51,6 +51,7 @@ function TransactionEvent (TRANSACTION_TYPE, symbol, quantity, price, DATETIME) 
   updateHistory();
   updateBalance();  
   updateCount();
+  draftTable('Market');
   console.log(TRANSACTION_TYPE + ' ' + symbol);
 }
 
@@ -103,7 +104,7 @@ function draftTable(Selectindustry) {
       Col3.innerHTML = obj[info_row].name;
       // Col3.innerHTML = obj[info_row].description;
       Col4.innerHTML = priceObj[ obj[info_row].symbol ][ priceObj[obj[info_row].symbol].length - 1 ].toFixed(2);     // Pulls latest price from price matrix
-      Col5.innerHTML = 0;
+      Col5.innerHTML = updateQuantity(obj[info_row].symbol);
       Col6.innerHTML = '<button onclick="' 
         + "TransactionEvent('BUY','" + obj[info_row].symbol + "',10,priceObj." + obj[info_row].symbol + '[priceObj.' + obj[info_row].symbol + '.length - 1],new Date());">Buy</button>'
         + '<button onclick="' 
@@ -130,5 +131,14 @@ function currentBalance () {
 
   function getSum(total, num) {
     return total + (num[3]*num[4]*num[5]);
+  };
+}
+
+function updateQuantity (symbol) {
+  const result = history.filter(record => record[1] == symbol);
+  return result.reduce(getSum, 0);
+
+  function getSum(total, num) {
+    return total + (num[3]);
   };
 }
