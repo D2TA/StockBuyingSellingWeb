@@ -99,13 +99,16 @@ function draftTable(Selectindustry) {
       var Col4   = newRow.insertCell(3);
       var Col5   = newRow.insertCell(4);
       var Col6   = newRow.insertCell(5);    
+      var Col7   = newRow.insertCell(6);
       Col1.innerHTML = obj[info_row].industry;
       Col2.innerHTML = obj[info_row].symbol;
       Col3.innerHTML = obj[info_row].name;
       // Col3.innerHTML = obj[info_row].description;
       Col4.innerHTML = priceObj[ obj[info_row].symbol ][ priceObj[obj[info_row].symbol].length - 1 ].toFixed(2);     // Pulls latest price from price matrix
       Col5.innerHTML = updateQuantity(obj[info_row].symbol);
-      Col6.innerHTML = '<button onclick="' 
+      Col6.innerHTML = 0;     // Average Price
+      Col7.innerHTML = 0;     // Percentage of Portfolio
+      Col7.innerHTML = '<button onclick="' 
         + "TransactionEvent('BUY','" + obj[info_row].symbol + "',10,priceObj." + obj[info_row].symbol + '[priceObj.' + obj[info_row].symbol + '.length - 1],new Date());">Buy</button>'
         + '<button onclick="' 
         + "TransactionEvent('SELL','" + obj[info_row].symbol + "',10,priceObj." + obj[info_row].symbol + '[priceObj.' + obj[info_row].symbol + '.length - 1],new Date());">Sell</button>';
