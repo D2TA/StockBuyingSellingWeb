@@ -52,6 +52,7 @@ function TransactionEvent (TRANSACTION_TYPE, symbol, quantity, price, DATETIME) 
   updateBalance();  
   updateCount();
   draftTable('Market');
+  UpdateAllocationData();
   console.log(TRANSACTION_TYPE + ' ' + symbol);
 }
 
@@ -106,12 +107,12 @@ function draftTable(Selectindustry) {
       // Col3.innerHTML = obj[info_row].description;
       Col4.innerHTML = priceObj[ obj[info_row].symbol ][ priceObj[obj[info_row].symbol].length - 1 ].toFixed(2);     // Pulls latest price from price matrix
       Col5.innerHTML = updateQuantity(obj[info_row].symbol);
-      Col6.innerHTML = 0;     // Average Price
+      Col6.innerHTML = updateBalance(obj[info_row].symbol).toFixed(2);     // Total Balance
       Col7.innerHTML = 0;     // Percentage of Portfolio
       Col7.innerHTML = '<button onclick="' 
-        + "TransactionEvent('BUY','" + obj[info_row].symbol + "',10,priceObj." + obj[info_row].symbol + '[priceObj.' + obj[info_row].symbol + '.length - 1],new Date());">Buy</button>'
+        + "TransactionEvent('BUY','" + obj[info_row].symbol + "',1,priceObj." + obj[info_row].symbol + '[priceObj.' + obj[info_row].symbol + '.length - 1],new Date());">Buy</button>'
         + '<button onclick="' 
-        + "TransactionEvent('SELL','" + obj[info_row].symbol + "',10,priceObj." + obj[info_row].symbol + '[priceObj.' + obj[info_row].symbol + '.length - 1],new Date());">Sell</button>';
+        + "TransactionEvent('SELL','" + obj[info_row].symbol + "',1,priceObj." + obj[info_row].symbol + '[priceObj.' + obj[info_row].symbol + '.length - 1],new Date());">Sell</button>';
     };
   };
 };
@@ -142,6 +143,15 @@ function updateQuantity (symbol) {
   return result.reduce(getSum, 0);
 
   function getSum(total, num) {
-    return total + (num[3]);
+    return total + (num[4]);
+  };
+}
+
+function updateBalance (symbol) {
+  const result = history.filter(record => record[1] == symbol);
+  return result.reduce(getSum, 0);
+
+  function getSum(total, num) {
+    return total + (num[3]*num[4]*num[5]);
   };
 }

@@ -62,7 +62,7 @@
         };
     </script>
   </head>
-  <body onload="ScriptOnload()">
+  <body onload="ScriptOnload()" onresize="PieResize()">
     <h1>Stocks 
     </h1>
     <div id = "VisualButton">
@@ -135,10 +135,13 @@
         </tr>
       </table>
     </div>
-    <div class = "chartTicker">
+    <div class = "chartTicker" style ="height:300px;">
       <h1>Display Trend</h1> 
-      <div id="trend">
-         <canvas id="myChart" width="400" height="100"></canvas>
+      <div id="line" style="position: relative;">
+         <canvas id="lineGraph" width="200" height="200"></canvas>
+      </div>
+      <div id="circle" >
+         <canvas id="allocation" width="200" height="200"></canvas>
       </div>
       <script src="./script-chartjs.js"></script>      
     </div>
