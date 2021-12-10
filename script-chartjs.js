@@ -26,7 +26,7 @@ function PortfolioData() {
   var PofPort = []
   for (row in obj) {
     var sym = obj[row].symbol;
-    var bal = updateBalance(sym);
+    var bal = updateSymbolBalance(sym);
     PofPort.push(bal)
     // total = total + bal;
   };
